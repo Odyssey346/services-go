@@ -25,7 +25,7 @@ jobs:
         with:
           registry: ghcr.io
           username: Odyssey346
-          password: ${{ secrets.PAT }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 'Build:dockerimage'
         uses: docker/build-push-action@v3
