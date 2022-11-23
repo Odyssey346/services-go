@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <title>services.odyssey346.dev</title>
+        <link rel="stylesheet" href="/style.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>services.odyssey346.dev / <a href="https://github.com/Odyssey346/services-go">source code</a></h1>
+        <h2>Front-ends</h2>
+        <p>These are front-ends to popular services, which you can use to improve your privacy, bypass restrictions, or reduce bandwidth usage.</p>
+        {{ if eq .invidious 200}}
+            <p><a href="https://inv.odyssey346.dev">Invidious</a> <span class="green">Up!</span> </p>
+        {{ else }}
+            <p><a href="https://inv.odyssey346.dev" class="redHover">Invidious</a> <span class="red">Down!</span> </p>
+        {{ end }}
+        {{ if eq .libreddit 200}}
+            <p><a href="https://lr.odyssey346.dev">Libreddit</a> <span class="green">Up!</span> </p>
+        {{ else }}
+            <p><a href="https://lr.odyssey346.dev" class="redHover">Libreddit</a> <span class="red">Down!</span> </p>
+        {{ end }}
+        {{ if eq .quetre 200}}
+            <p><a href="https://qtr.odyssey346.dev">Quetre</a> <span class="green">Up!</span> </p>
+        {{ else }}
+            <p><a href="https://qtr.odyssey346.dev" class="redHover">Quetre</a> <span class="red">Down!</span> </p>
+        {{ end }}
+        {{ if eq .breezewiki 200}}
+            <p><a href="https://bw.odyssey346.dev">BreezeWiki</a> <span class="green">Up!</span> </p>
+        {{ else }}
+            <p><a href="https://bw.odyssey346.dev" class="redHover">BreezeWiki</a> <span class="red">Down!</span> </p>
+        {{ end }}
+        {{ if eq .rimgo 200}}
+            <p><a href="https://rim.odyssey346.dev">rimgo</a> <span class="green">Up!</span> </p>
+        {{ else }}
+            <p><a href="https://rim.odyssey346.dev" class="redHover">rimgo</a> <span class="red">Down!</span> </p>
+        {{ end }}
+        {{ if eq .proxitok 200}}
+            <p><a href="https://proxitok.odyssey346.dev">ProxiTok</a> <span class="green">Up!</span> </p>
+        {{ else }}
+            <p><a href="https://proxitok.odyssey346.dev" class="redHover">ProxiTok</a> <span class="red">Down!</span> </p>
+        {{ end }}
+        {{ if eq .nitter 200}}
+            <p><a href="https://ntr.odyssey346.dev">Nitter</a> <span class="green">Up!</span> </p>
+        {{ else }}
+            <p><a href="https://ntr.odyssey346.dev" class="redHover">Nitter</a> <span class="red">Down!</span> </p>
+        {{ end }}
+        <h2>Originals</h2>
+        <p>These are services I have made myself.</p>
+        {{ if eq .memestream 200}}
+            <p><a href="https://ms.odyssey346.dev">memestream</a> <span class="green">Up!</span> </p>
+        {{ else }}
+            <p><a href="https://ms.odyssey346.dev" class="redHover">memestream</a> <span class="red">Down!</span> </p>
+        {{ end }}
+        {{ if eq .thiswebsite 200}}
+            <p><a href="https://services.odyssey346.dev">This website</a> <span class="green">Up!</span> </p>
+        {{ else }}
+            <p><a href="https://services.odyssey346.dev" class="redHover">This website</a> <span class="red">Down!</span> </p>
+        {{ end }}
+        <b>Status retrieved at {{.time}}</b>
+    </body>
+</html>

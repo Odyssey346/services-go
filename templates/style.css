@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap');
+
+body {
+    background-color: #171717;
+    color: #fff;
+    font-family: "Nunito", sans-serif;
+}
+
+a {
+    color: #fff;
+    text-underline-offset: 5px;
+}
+
+.green {
+    color: #00ff00;
+}
+
+.red {
+    color: #ff0000;
+}
+
+a:hover {
+    color: #00d455;
+}
+
+.redHover:hover {
+    color: #ff0000;
+}

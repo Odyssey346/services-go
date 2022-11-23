@@ -1,0 +1,8 @@
+services:
+
+  services:
+      container_name: services
+      image: ghcr.io/odyssey346/services-go:latest
+      restart: always
+      ports:
+          - "2578:8000"
