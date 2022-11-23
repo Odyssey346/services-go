@@ -1,97 +1,93 @@
 package main
 
 import (
-	"html/template"
-	"io"
-	"net/http"
+	"log"
 
-	"github.com/labstack/echo/v4"
 	"github.com/levigross/grequests"
 
 	"time"
+
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cache"
+	"github.com/gofiber/template/html"
 )
 
 // TemplateRenderer is a custom html/template renderer for Echo framework
-type TemplateRenderer struct {
-	templates *template.Template
-}
-
-// Render renders a template document
-func (t *TemplateRenderer) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
-
-	// Add global methods if data is a map
-	if viewContext, isMap := data.(map[string]interface{}); isMap {
-		viewContext["reverse"] = c.Echo().Reverse
-	}
-
-	return t.templates.ExecuteTemplate(w, name, data)
-}
 
 func main() {
-	e := echo.New()
-	renderer := &TemplateRenderer{
-		templates: template.Must(template.ParseGlob("templates/*.html")),
-	}
-	e.Renderer = renderer
+	renderEngine := html.New("./templates", ".html")
+	app := fiber.New(fiber.Config{
+		Views:   renderEngine,
+		AppName: "services-go",
+	})
 
-	e.GET("/", func(c echo.Context) error {
+	app.Use(cache.New(cache.Config{
+		Expiration: 1 * time.Minute,
+	}))
+
+	app.Get("/", func(c *fiber.Ctx) error {
 		memestream, err := grequests.Get("https://ms.odyssey346.dev", nil)
+		log.Println("Memestream status:", memestream.StatusCode)
 		if err != nil {
-			return c.String(http.StatusInternalServerError, err.Error())
+			return c.SendString("Something broke")
 		}
 		inv, err := grequests.Get("https://inv.odyssey346.dev", nil)
 		if err != nil {
-			return c.String(http.StatusInternalServerError, err.Error())
+			return c.SendString("Something broke")
 		}
+		log.Println("Invidious status:", inv.StatusCode)
 		libreddit, err := grequests.Get("https://lr.odyssey346.dev", nil)
 		if err != nil {
-			return c.String(http.StatusInternalServerError, err.Error())
+			return c.SendString("Something broke")
 		}
+		log.Println("Libreddit status:", libreddit.StatusCode)
 		quetre, err := grequests.Get("https://qtr.odyssey346.dev", nil)
 		if err != nil {
-			return c.String(http.StatusInternalServerError, err.Error())
+			return c.SendString("Something broke")
 		}
+		log.Println("Quetre status:", quetre.StatusCode)
 		breezewiki, err := grequests.Get("https://bw.odyssey346.dev", nil)
 		if err != nil {
-			return c.String(http.StatusInternalServerError, err.Error())
+			return c.SendString("Something broke")
 		}
-		thiswebsite, err := grequests.Get("https://services.odyssey346.dev", nil)
-		if err != nil {
-			return c.String(http.StatusInternalServerError, err.Error())
-		}
+		log.Println("Breezewiki status:", breezewiki.StatusCode)
 		rimgo, err := grequests.Get("https://rim.odyssey346.dev", nil)
 		if err != nil {
-			return c.String(http.StatusInternalServerError, err.Error())
+			return c.SendString("Something broke")
 		}
+		log.Println("Rimgo status:", rimgo.StatusCode)
 		proxitok, err := grequests.Get("https://proxitok.odyssey346.dev", nil)
 		if err != nil {
-			return c.String(http.StatusInternalServerError, err.Error())
+			return c.SendString("Something broke")
 		}
+		log.Println("Proxitok status:", proxitok.StatusCode)
 		nitter, err := grequests.Get("https://ntr.odyssey346.dev", nil)
 		if err != nil {
-			return c.String(http.StatusInternalServerError, err.Error())
+			return c.SendString("Something broke")
 		}
+		log.Println("Nitter status:", nitter.StatusCode)
 		dt := time.Now()
 		// cache stuff
-		return c.Render(http.StatusOK, "root.html", map[string]interface{}{
-			"memestream":  memestream.StatusCode,
-			"invidious":   inv.StatusCode,
-			"thiswebsite": thiswebsite.StatusCode,
-			"libreddit":   libreddit.StatusCode,
-			"quetre":      quetre.StatusCode,
-			"breezewiki":  breezewiki.StatusCode,
-			"rimgo":       rimgo.StatusCode,
-			"proxitok":    proxitok.StatusCode,
-			"nitter":      nitter.StatusCode,
-			"time":        dt.Format("2006-01-02 15:04:05"),
+		return c.Render("root", fiber.Map{
+			"memestream": memestream.StatusCode,
+			"invidious":  inv.StatusCode,
+			"libreddit":  libreddit.StatusCode,
+			"quetre":     quetre.StatusCode,
+			"breezewiki": breezewiki.StatusCode,
+			"rimgo":      rimgo.StatusCode,
+			"proxitok":   proxitok.StatusCode,
+			"nitter":     nitter.StatusCode,
+			"time":       dt.Format("2006-01-02 15:04:05"),
 		})
 	})
 
-	e.GET("/502", func(c echo.Context) error {
-		return c.Render(http.StatusOK, "502.html", nil)
+	app.Get("/502", func(c *fiber.Ctx) error {
+		return c.Render("502", fiber.Map{
+			"Title": "502 Bad Gateway",
+		})
 	})
 
-	e.File("/style.css", "templates/style.css")
+	app.Static("/style.css", "templates/style.css")
 
-	e.Logger.Fatal(e.Start(":8000"))
+	log.Fatal(app.Listen(":8000"))
 }
