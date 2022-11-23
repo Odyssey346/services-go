@@ -9,6 +9,7 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cache"
+	"github.com/gofiber/fiber/v2/middleware/limiter"
 	"github.com/gofiber/template/html"
 )
 
@@ -25,7 +26,15 @@ func main() {
 		Expiration: 1 * time.Minute,
 	}))
 
-	app.Get("/", func(c *fiber.Ctx) error {
+	ratelimit := limiter.New(limiter.Config{
+		Max:        10,
+		Expiration: 5 * time.Minute,
+		LimitReached: func(c *fiber.Ctx) error {
+			return c.Status(429).SendString("Please stop refreshing the page so much. Wait 5 minutes and try again.")
+		},
+	})
+
+	app.Get("/", ratelimit, func(c *fiber.Ctx) error {
 		memestream, err := grequests.Get("https://ms.odyssey346.dev", nil)
 		log.Println("Memestream status:", memestream.StatusCode)
 		if err != nil {
