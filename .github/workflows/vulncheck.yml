@@ -15,5 +15,6 @@ jobs:
           export GO111MODULE=on
           export PATH=${PATH}:`go env GOPATH`/bin
           go install golang.org/x/vuln/cmd/govulncheck@latest
+          go get github.com/mattn/go-isatty@v0.0.14
     - name: Run Govulncheck
       run: "`go env GOPATH`/bin/govulncheck ./..."
