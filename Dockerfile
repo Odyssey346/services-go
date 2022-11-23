@@ -11,5 +11,6 @@ RUN go clean -modcache
 
 FROM alpine:3.16 as binary
 WORKDIR /app
+COPY --from=build /src/templates /app/templates
 COPY --from=build /src/services /app
 CMD ["/app/services"]
