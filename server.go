@@ -3,8 +3,6 @@ package main
 import (
 	"log"
 
-	"github.com/levigross/grequests"
-
 	"time"
 
 	"github.com/gofiber/fiber/v2"
@@ -35,57 +33,17 @@ func main() {
 	})
 
 	app.Get("/", ratelimit, func(c *fiber.Ctx) error {
-		memestream, err := grequests.Get("https://ms.odyssey346.dev", nil)
-		log.Println("Memestream status:", memestream.StatusCode)
-		if err != nil {
-			return c.SendString("Something broke")
-		}
-		inv, err := grequests.Get("https://inv.odyssey346.dev", nil)
-		if err != nil {
-			return c.SendString("Something broke")
-		}
-		log.Println("Invidious status:", inv.StatusCode)
-		libreddit, err := grequests.Get("https://lr.odyssey346.dev", nil)
-		if err != nil {
-			return c.SendString("Something broke")
-		}
-		log.Println("Libreddit status:", libreddit.StatusCode)
-		quetre, err := grequests.Get("https://qtr.odyssey346.dev", nil)
-		if err != nil {
-			return c.SendString("Something broke")
-		}
-		log.Println("Quetre status:", quetre.StatusCode)
-		breezewiki, err := grequests.Get("https://bw.odyssey346.dev", nil)
-		if err != nil {
-			return c.SendString("Something broke")
-		}
-		log.Println("Breezewiki status:", breezewiki.StatusCode)
-		rimgo, err := grequests.Get("https://rim.odyssey346.dev", nil)
-		if err != nil {
-			return c.SendString("Something broke")
-		}
-		log.Println("Rimgo status:", rimgo.StatusCode)
-		proxitok, err := grequests.Get("https://proxitok.odyssey346.dev", nil)
-		if err != nil {
-			return c.SendString("Something broke")
-		}
-		log.Println("Proxitok status:", proxitok.StatusCode)
-		nitter, err := grequests.Get("https://ntr.odyssey346.dev", nil)
-		if err != nil {
-			return c.SendString("Something broke")
-		}
-		log.Println("Nitter status:", nitter.StatusCode)
 		dt := time.Now()
 		// cache stuff
 		return c.Render("root", fiber.Map{
-			"memestream": memestream.StatusCode,
-			"invidious":  inv.StatusCode,
-			"libreddit":  libreddit.StatusCode,
-			"quetre":     quetre.StatusCode,
-			"breezewiki": breezewiki.StatusCode,
-			"rimgo":      rimgo.StatusCode,
-			"proxitok":   proxitok.StatusCode,
-			"nitter":     nitter.StatusCode,
+			"memestream": Ping("https://ms.odyssey346.dev"),
+			"invidious":  Ping("https://inv.odyssey346.dev"),
+			"libreddit":  Ping("https://lr.odyssey346.dev"),
+			"quetre":     Ping("https://qtr.odyssey346.dev"),
+			"breezewiki": Ping("https://bw.odyssey346.dev"),
+			"rimgo":      Ping("https://rim.odyssey346.dev"),
+			"proxitok":   Ping("https://proxitok.odyssey346.dev"),
+			"nitter":     Ping("https://ntr.odyssey346.dev"),
 			"time":       dt.Format("2006-01-02 15:04:05"),
 		})
 	})
