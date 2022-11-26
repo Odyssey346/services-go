@@ -20,8 +20,11 @@ import (
 func main() {
 	renderEngine := html.New("./templates", ".html")
 	app := fiber.New(fiber.Config{
-		Views:   renderEngine,
-		AppName: "services-go",
+		Views:                   renderEngine,
+		AppName:                 "services-go",
+		EnableTrustedProxyCheck: true,
+		TrustedProxies:          []string{"*"},
+		ProxyHeader:             fiber.HeaderXForwardedFor,
 	})
 
 	app.Use(cache.New(cache.Config{
