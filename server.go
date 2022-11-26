@@ -23,7 +23,7 @@ func main() {
 		Views:                   renderEngine,
 		AppName:                 "services-go",
 		EnableTrustedProxyCheck: true,
-		TrustedProxies:          []string{"*"},
+		TrustedProxies:          []string{"0.0.0.0/0"},
 		ProxyHeader:             fiber.HeaderXForwardedFor,
 	})
 
