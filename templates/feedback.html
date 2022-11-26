@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <title>services.odyssey346.dev</title>
+        <link rel="stylesheet" href="/style.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+</html>
+<body>
+    <h1>Your feedback</h1>
+    <h2>Fill out this form to send me a message about how you feel using our services.</h2>
+    <i>Note: your IP will be logged internally for anti-abuse purposes.</i>
+    <br>
+    <form action="/api/feedback" method="POST">
+        <fieldset>
+            <legend>Feedback Form</legend>
+            <label for="service">What service are you using that you would like to report feedback on?</label>
+            <br>
+            <select id="service" name="service" required class="selectService">
+                <option value="forgottoselect" selected="selected" disabled hidden>Please select...</option>
+                <option value="invidious">Invidious</option>
+                <option value="libreddit">Libreddit</option>
+                <option value="quetre">Quetre</option>
+                <option value="breezewiki">BreezeWiki</option>
+                <option value="rimgo">Rimgo</option>
+                <option value="breezewiki">ProxiTok</option>
+                <option value="nitter">Nitter</option>
+                <option value="other">Other</option>
+            </select>
+            <br>
+            <label for="email">Your email</label>
+            <br>
+            <input type="email" name="email" id="email" class="selectEmail" placeholder="For further contact if I need to talk to you further with follow-up questions etc." required />
+            <br>
+            <label for="message">Your message</label>
+            <br>
+            <textarea name="message" id="message" cols="30" class="messageBox" rows="10" placeholder="I need to know what your feedback is." requierd></textarea>
+            <br> <br>
+            <input type="submit" value="Send" class="sendButton" alt="Send your feedback!" />
+            <p><i>Note: if the instance is slow for you, please check your Internet connection. Our servers are hosted in Europe.</i></p>
+        </fieldset>
+    </form>
+</body>

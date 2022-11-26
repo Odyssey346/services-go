@@ -26,3 +26,44 @@ a:hover {
 .redHover:hover {
     color: #ff0000;
 }
+
+.selectService {
+    background-color: #252525;
+    border: 1px solid #252525;
+    color: #fff;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+.selectEmail {
+    background-color: #252525;
+    border: 1px solid #252525;
+    color: #fff;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+.messageBox {
+    background-color: #252525;
+    border: 1px solid #252525;
+    color: #fff;
+    border-radius: 8px;
+    padding: 5px;
+}
+
+.sendButton {
+    background-color: #252525;
+    border: 1px solid #252525;
+    color: #fff;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.sendButton:hover {
+    background-color: #00d455;
+    border: 1px solid #00d455;
+    color: #fff;
+    border-radius: 8px;
+    padding: 8px;
+    cursor: pointer;
+}
