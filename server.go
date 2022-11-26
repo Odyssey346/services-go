@@ -15,8 +15,6 @@ import (
 	"github.com/containrrr/shoutrrr"
 )
 
-// TemplateRenderer is a custom html/template renderer for Echo framework
-
 func main() {
 	renderEngine := html.New("./templates", ".html")
 	app := fiber.New(fiber.Config{
