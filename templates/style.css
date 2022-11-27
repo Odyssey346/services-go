@@ -67,3 +67,7 @@ a:hover {
     padding: 8px;
     cursor: pointer;
 }
+
+ul {
+    padding: 0;
+}

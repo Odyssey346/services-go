@@ -9,6 +9,16 @@
         <h2>Front-ends</h2>
         <p>These are front-ends to popular services, which you can use to improve your privacy, bypass restrictions, or reduce bandwidth usage.</p>
         <p>If you have any feedback regarding these instances, <a href="/feedback">you can send them here.</a></p>
+        <details>
+            <summary>Why use my front-end instances over anyone elses</summary>
+            <ul>
+                <li>Automatic updates - these instances check for updates every 3 hours. This means that you will get the latest and greatest privacy experience.</li>
+                <li>EU based - my servers are located in France and Poland.</li>
+                <li>No logs - I will never figure out who is using my instances.</li>
+                <li>Security - my server does not have any unnecessary ports open and we use Caddy instead of Nginx which is a more secure web server. We also containerize all the services.</li>
+                <li>No modifications done to the frontends - just a nice, stock experience like the frontend's developer intended.</li>
+            </ul>
+        </details>
         {{ if eq .invidious 200}}
             <p><a href="https://inv.odyssey346.dev">Invidious</a> - <a href="http://ytzrxeca5esxa356lxrhk6kq5qfgk4rqh4ubadnrlxyfvgx7qiwpc6ad.onion">Tor</a> <span class="green">Up!</span> </p>
         {{ else }}
